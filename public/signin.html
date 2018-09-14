@@ -1,0 +1,40 @@
+
+<div class="h-vh-100">
+        <form class="login-form bg-white p-6 mx-auto border bd-default win-shadow" ng-submit="signin()"
+        
+              data-role="validator"
+              action="javascript:"
+              data-clear-invalid="2000"
+              data-on-error-form="invalidForm"
+              data-on-validate-form="validateForm">
+            <span class="mif-vpn-lock mif-4x place-right" style="margin-top: -10px;"></span>
+            <h2 class="text-light">Login to service</h2>
+            <hr class="thin mt-4 mb-4 bg-white">
+            <div class="form-group">
+                <input type="text" data-role="input" ng-model="username" data-prepend="<span class='mif-envelop'>" placeholder="Username" data-validate="required email">
+            </div>
+            <div class="form-group">
+                <input type="password" data-role="input" ng-model="password" data-prepend="<span class='mif-key'>" placeholder="Password..." data-validate="required minlength=6">
+            </div>
+            <div class="form-group mt-10">
+                <input type="checkbox" data-role="checkbox" data-caption="Remember me" class="place-right">
+                <button class="button">Submit form</button>
+            </div>
+        </form>
+    
+        <script>
+            function invalidForm(){
+                var form  = $(this);
+                form.addClass("ani-ring");
+                setTimeout(function(){
+                    form.removeClass("ani-ring");
+                }, 1000);
+            }
+    
+            function validateForm(){
+                $(".login-form").animate({
+                    opacity: 0
+                });
+            }
+        </script>
+    </div>

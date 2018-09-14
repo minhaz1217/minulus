@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta name="twitter:site" content="@metroui">
+    <meta name="twitter:creator" content="@pimenov_sergey">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Metro 4 Components Library">
+    <meta name="twitter:description" content="Metro 4 is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your ideas or build your entire app with responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery.">
+    <meta name="twitter:image" content="https://metroui.org.ua/images/m4-logo-social.png">
+
+    <meta property="og:url" content="https://metroui.org.ua/v4/index.html">
+    <meta property="og:title" content="Metro 4 Components Library">
+    <meta property="og:description" content="Metro 4 is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your ideas or build your entire app with responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://metroui.org.ua/images/m4-logo-social.png">
+    <meta property="og:image:secure_url" content="https://metroui.org.ua/images/m4-logo-social.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="968">
+    <meta property="og:image:height" content="504">
+
+    <meta name="author" content="Sergey Pimenov">
+    <meta name="description" content="The most popular HTML, CSS, and JS library in Metro style.">
+    <meta name="keywords" content="HTML, CSS, JS, Metro, CSS3, Javascript, HTML5, UI, Library, Web, Development, Framework">
+-->
+
+    <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+    <link href="stylesheets/metro-all.min.css" rel="stylesheet">
+
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/metro.min.js"></script>
+    <script src= "javascripts/angular.min.js">  </script>
+    <script src="javascripts/angular-route.js"></script>
+    <script src="javascripts/minulus.js"></script>
+    
+    <title>Login</title>
+
+    <style>
+            .login-form {
+                width: 350px;
+                height: auto;
+                top: 50%;
+                margin-top: -160px;
+            }
+        </style>
+
+</head>
+<body class="bg-brandColor2" ng-app="minulus">
+
+        <aside class="sidebar pos-absolute z-2"
+        data-role="sidebar"
+        data-toggle="#sidebar-toggle-3"
+        id="sb3"
+        data-shift=".shifted-content">
+        <div class="sidebar-header">
+                <a href="/" class="fg-white sub-action"
+                   onclick="Metro.sidebar.close('#sb1'); return false;">
+                    <span class="mif-arrow-left mif-2x"></span>
+                </a>
+                <div class="avatar">
+                    <img data-role="gravatar" data-email="sergey@pimenov.com.ua">
+                </div>
+                <span class="title">Minulus</span>
+                <span class="subtitle"> 2018 © Minhazul Hayat Khan</span>
+            </div>
+     <ul class="sidebar-menu">
+            <li><a href="#/dashboard"><span class="mif-files-empty icon"></span>Dashboard</a></li>
+         <li><a href="#/signin"><span class="mif-home icon"></span>Login</a></li>
+         <li><a href="#/signup"><span class="mif-books icon"></span>Register</a></li>
+     </ul>
+ </aside>
+ <div class="shifted-content h-100 p-ab">
+     <div class="app-bar pos-absolute bg-red z-1" data-role="appbar">
+         <button class="app-bar-item c-pointer" id="sidebar-toggle-3">
+             <span class="mif-menu fg-white"></span>
+         </button>
+     </div>
+ 
+ </div>
+
+ 
+<div ng-view>
+
+</div>
+</body>
+</html>
