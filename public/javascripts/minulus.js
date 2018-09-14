@@ -1,4 +1,18 @@
-var app = angular.module("minulus",['ngRoute']);
+var app = angular.module("minulus",['ngRoute', 'ngResource']).run(function($rootScope){
+
+    if($rootScope.authenticated == null || $rootScope.authenticated == false){
+        $rootScope.authenticated = false;
+        $rootScope.current_user = "";
+    }
+
+        $rootScope.authenticated = false;
+        $rootScope.current_user = "";
+    $rootScope.signout = function(){
+        $http.get('auth/signout');
+        $rootScope.authenticated = false;
+        $rootScope.current_user = "";
+    }
+});
 
 
 app.config(function($routeProvider){
@@ -13,7 +27,7 @@ app.config(function($routeProvider){
     })
     .when('/dashboard', {
         templateUrl : "dashboard.html",
-        controller: "mainController"
+        controller: "dashBoardcontroller"
     })
     .when('/signup', {
         templateUrl : "signup.html",
@@ -30,18 +44,64 @@ app.config(function($routeProvider){
     });
 });
 
-
+app.factory('postService', function($http){
+    var factory = {};
+    factory.getAll = function(){
+        return $http.post("/api/posts", {username: "hello112"}).success(function(status, data){
+            if(status == 200){
+                return data;
+            }else{
+                return {error: "NOT FOUND"};                
+            }
+        });
+    }
+    return factory;
+})
 app.controller("mainController", function($scope){
 
 });
 
-app.controller("signController", function($scope,$http){
+app.controller("dashBoardcontroller", function($scope,$rootScope,$location,postService,$http){
+    /*
+    if($rootScope.authenticated == false){
+        $location.path("/signin");
+        console.log("Sign in first");
+        return;
+    }else{
+        $scope.username = $rootScope.current_user;
+    }
+    */
+   $scope.username = $rootScope.current_user;
+
+   /*
+   postService.getAll().success(function(data){
+       $scope.datas = data;
+   });
+   */
+  $http.post("/api/posts", {user: $rootScope.current_user}).success(function(data){
+    if(data != ""){
+        $scope.datas = data;
+    }else{
+        $scope.error_message = "You need to re-login.";
+    }
+
+});
+//   $scope.datas = postService.query();
+
+
+})
+
+app.controller("signController", function($scope,$http,$rootScope,$location){
     $scope.signin = function(){
         var user = {username: $scope.username, password : $scope.password};
         $http.post("/auth/signin", user).success(function(data){
             if(data.state == 'success'){
-                console.log("SUCCESS");
+                $rootScope.authenticated = true;
+                $rootScope.current_user = data.user.username;
+                $location.path("/dashboard");
+                console.log("Successful");
             }else{
+                $scope.error_message = data.message;
                 console.log("Unsuccessful");
             }
         });
@@ -51,8 +111,12 @@ app.controller("signController", function($scope,$http){
         var user = {username: $scope.username, password : $scope.password, created_at : Date.now()};
         $http.post("/auth/signup", user).success(function(data){
             if(data.state == 'success'){
-                console.log("SUCCESS");
+                $rootScope.authenticated = true;
+                $rootScope.current_user = data.user.username;
+                $location.path("/dashboard");
+                console.log("Successful");
             }else{
+                $scope.error_message = data.message;
                 console.log("Unsuccessful");
             }
         });

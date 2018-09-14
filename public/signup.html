@@ -1,5 +1,5 @@
 
-<div class="h-vh-100">
+<div class="h-vh-100 bg-yellow">
         <form class="login-form bg-white p-6 mx-auto border bd-default win-shadow" ng-submit="signup()">
             <span class="mif-vpn-lock mif-4x place-right" style="margin-top: -10px;"></span>
             <h2 class="text-light">Signup for minulus</h2>
@@ -16,19 +16,9 @@
             </div>
         </form>
     
-        <script>
-            function invalidForm(){
-                var form  = $(this);
-                form.addClass("ani-ring");
-                setTimeout(function(){
-                    form.removeClass("ani-ring");
-                }, 1000);
-            }
-    
-            function validateForm(){
-                $(".login-form").animate({
-                    opacity: 0
-                });
-            }
-        </script>
+
     </div>
+    
+<script>
+        document.body.setAttribute("class", "bg-yellow");
+    </script>

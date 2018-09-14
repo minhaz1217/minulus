@@ -1,11 +1,7 @@
 var express = require("express");
 var router = express.Router();
-
-
-router.route("/posts")
-.get(function(req, res){
-    return res.send(200, "HELLO WORLD");
-});
+var mongoose = require("mongoose");
+var data = mongoose.model("Data");
 
 //send will only receive the messages and store them in the database
 router.route("/send")
@@ -13,60 +9,36 @@ router.route("/send")
     return res.send(200, "Congratulation!!! You've Found it");
 })
 .post(function(req,res){
-    console.log(req.body.message);
-    res.send(200,req.body.user);
-
+    console.log("Received: " + req.body.user + " >>  " + req.body.message);
+    var newData = new data();
+    newData.message= req.body.message;
+    newData.username = req.body.user;
+    newData.save(function(err,post){
+        if(err){
+            //TODO: change this for deployment
+            return res.send(500, err);
+        }
+        console.log("Data saved successfully");
+        return res.json(post);
+    });
     //res.send({message: "TODO: save the post", user: req.body.user, message: req.body.messaage});
 });
 
-router.route("/posts/:user")
+router.route("/posts")
 .post(function(req,res){
-    // match the user wtih the usernames in the database and send their minuls back to them
-    // the user MUST BE LOGGED IN
+    console.log("HELLO: "+ req.body.user);
+    data.find({username: req.body.user}, function(err, data){
+        if(err){
+            return res.send(500, err);
+        }
+        return res.json(200, data);
+    });
+    //res.send(200,"HELLO");
+    
+})
+.get(function(req,res){
+    res.send(200,"HI");
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// user loging
-router.route("/signin")
-.post(function(req,res){
-    console.log("SIGNUP REQUEST");
-    res.send(200, "REQUEST RECIEVED");
-    // match password and username with those in the database
-});
-
-router.route("/signup")
-.post(function(req,res){
-    console.log("SIGNUP REQUEST");
-    res.send(200, "REQUEST RECIEVED");
-    // save the username password and created at in the database
-});
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports= router;

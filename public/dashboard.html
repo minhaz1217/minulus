@@ -1,1 +1,22 @@
-<h1>Dashboard</h1>>
+
+<div  class="h-vh-100 container-fluid ">
+    <div class="">
+    <h1>HELLO WORLD</h1>
+        <!-- content here --><h1>{{username}}</h1>
+    </div>
+    <div class="bg-red fg-white">{{error_message}}
+        </div>
+    <h1 class=".bg-red"></h1>
+    <div id="post-stream">
+                <div class="post" ng-repeat="minuls in datas | orderBy:'created_at':true" ng-class-odd="'odd'" ng-class-even="'even'"> 
+                  <p>{{minuls.message}}</p>
+                <small class="pull-right">{{minuls.created_at | date:"h:mma 'on' MMM d, y"}}</small>
+                </div>
+          </div>
+
+
+</div>
+
+<script>
+        document.body.setAttribute("class", "bg-green");
+</script>

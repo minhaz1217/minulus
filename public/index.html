@@ -37,9 +37,10 @@
     <script src="javascripts/metro.min.js"></script>
     <script src= "javascripts/angular.min.js">  </script>
     <script src="javascripts/angular-route.js"></script>
+    <script src="javascripts/angular-resource.js"></script>
     <script src="javascripts/minulus.js"></script>
     
-    <title>Login</title>
+    <title>Minulus: Send anonymuous messages</title>
 
     <style>
             .login-form {
@@ -51,8 +52,7 @@
         </style>
 
 </head>
-<body class="bg-brandColor2" ng-app="minulus">
-
+<body ng-app="minulus">
         <aside class="sidebar pos-absolute z-2"
         data-role="sidebar"
         data-toggle="#sidebar-toggle-3"
@@ -81,12 +81,9 @@
              <span class="mif-menu fg-white"></span>
          </button>
      </div>
- 
- </div>
-
- 
 <div ng-view>
 
+</div>
 </div>
 </body>
 </html>
