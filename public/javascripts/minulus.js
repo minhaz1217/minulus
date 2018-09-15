@@ -1,18 +1,22 @@
 var app = angular.module("minulus",['ngRoute', 'ngResource']).run(function($rootScope, $http,$location){
+
+    $rootScope.websiteRoot = "https://minulus.herokuapp.com/#/u/";
     $http.get("/auth/loginCheck").success(function(data){
         if(data.state == "success"){
             $rootScope.current_user = data.user;
             $rootScope.authenticated = true;
+            console.log("HI");
         }else{
             $rootScope.current_user = null;
             $rootScope.authenticated = false;
+            $rootScope.$broadcast("myuser", {state: "fail", user: null});
         }
     });
     $rootScope.signout = function(){
         $http.get('auth/signout');
         $rootScope.authenticated = false;
         $rootScope.current_user = "";
-        console.log("HI");
+        console.log("Signedout");
         $location.path("/");
     }
 });
@@ -68,7 +72,7 @@ app.controller("mainController", function($scope){
 
 });
 
-app.controller("dashBoardcontroller", function($scope,$rootScope,$location,postService,$http){
+app.controller("dashBoardcontroller", function($scope,$rootScope,$location,$http){
 
     if($rootScope.authenticated == false){
         $location.path("/signin");
@@ -76,9 +80,16 @@ app.controller("dashBoardcontroller", function($scope,$rootScope,$location,postS
         return;
     }else{
         $scope.username = $rootScope.current_user;
+        if($scope.username == "undefined" || $scope.username == null){
+            console.log("GOTO");
+            $location.path("/");
+        }
+
+        console.log("HI: " + $rootScope.authenticated);
         //TODO: must change the website root
         var websiteRoot = "https://minulus.herokuapp.com/#/u/";
         $scope.urlValue = websiteRoot+$scope.username;
+        
         $http.post("/api/posts", {user: $rootScope.current_user}).success(function(data){
             $scope.datas = data;
             //console.log(data);

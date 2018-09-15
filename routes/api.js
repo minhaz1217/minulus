@@ -62,7 +62,7 @@ router.route("/u")
 
 router.route("/posts")
 .post(function(req,res){
-    console.log("HELLO: "+ req.body.user);
+    console.log("Hello Post: "+ req.body.user);
     data.find({username: req.body.user}, function(err, data){
         if(err){
             return res.send(500, err);

@@ -1,5 +1,5 @@
 
-<div  class="h-vh-100">
+<div  class="h-vh-100" ng-show="authenticated">
 <div class="row">
 <div class="cell-10 offset-1">
 <center>
@@ -12,9 +12,16 @@
             {
                 html: "<span class='mif-copy'></span>",
                 cls: "alert",
-                onclick: "document.getElementById('url').select()"
+                onclick: "textForm()"
             }
         ]
+        function textForm(){
+            document.getElementById('url').select();
+            var toast = Metro.toast.create;
+            toast("Press 'CTRL + C' to copy");
+            console.log("DONE");
+
+        }
     </script>
 </center>
 </div>
@@ -73,7 +80,7 @@
             content: "<div>"+ msg +"</div>"
         });
         */
-        console.log(date + msg);
+        //console.log(date + msg);
     }
 </script>
                             <!--

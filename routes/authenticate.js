@@ -33,7 +33,7 @@ module.exports = function(passport){
 	});
 	router.get('/loginCheck', function(req, res) {
 		if(req.isAuthenticated()){
-			console.log("TRUE");
+			console.log(req.user.username + " logged in");
 			return res.send({state:"success", user: req.user.username});
 		}else{
 			console.log("false");
