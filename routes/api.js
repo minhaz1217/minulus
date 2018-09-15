@@ -5,6 +5,7 @@ var data = mongoose.model("Data");
 var account = mongoose.model("Accounts");
 
 router.use(function(req,res, next){
+    console.log("REQUEST REC");
     if(req.method == 'GET' || req.url =="/u" ||req.url =="/send"){
         // continuez to the next middleware or request handler.
         return next();

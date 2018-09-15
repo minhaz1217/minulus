@@ -2,7 +2,7 @@ var LocalStrategy   = require('passport-local').Strategy;
 var bCrypt = require('bcrypt-nodejs');
 var mongoose = require("mongoose");
 var account = mongoose.model("Accounts");
-
+var datas = mongoose.model("Data");
 module.exports = function(passport){
 
 	// Passport needs to be able to serialize and deserialize users to support persistent login sessions
@@ -71,6 +71,14 @@ module.exports = function(passport){
 							return done(null, false);
 						}
 						console.log(newAccount.username + " registration successful");
+						var newMessage = new datas();
+						newMessage.message = "Please accept my heartfelt thank you for trying out this project -minhaz";
+						newMessage.username = newAccount.username;
+						newMessage.save(function(err){
+							if(err){
+								console.log("Error in saving the first message");
+							}
+						});
 						return done(null, newAccount);
 					});
 				}

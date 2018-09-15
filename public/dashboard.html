@@ -1,5 +1,5 @@
 
-<div  class="h-vh-100 container-fluid">
+<div  class="h-vh-100">
 <div class="row">
 <div class="cell-10 offset-1">
 <center>
@@ -19,32 +19,69 @@
 </center>
 </div>
 </div>
-    <div class="">
+<!--
+        <div class="">
     <h1>HELLO WORLD</h1>
-        <!-- content here --><h1>{{username}}</h1>
+       {{username}}</h1>
     </div>
     <div class="bg-red fg-white">{{error_message}}
         </div>
     <h1 class=".bg-red"></h1>
     <div id="post-stream">
-
-
-
-                <div class="post" ng-repeat="minuls in datas | orderBy:'created_at':true" ng-class-odd="'odd'" ng-class-even="'even'"> 
-
-                        <div data-role="panel" data-title-caption="{{minuls.created_at | date:/"h:mma 'on' MMM d, y/"}}"
-                        data-title-icon="<span class='mif-apps'></span>">
-                            
-                        <div>{{minuls.message}}</div>
-                        </div>
-                        <p>Show larger</p>
-                  <p>{{minuls.message}}</p>
-                <small class="pull-right">"{{minuls.created_at | date:"h:mma 'on' MMM d, y"}}"</small>
-                </div>
-          </div>
-
+    -->
+<div class="row">
+    <div id="card{{$index}}" class="bg-white card cell-sm-full cell-md-one-third cell-lg-3 " style="margin-top:1rem" ng-repeat="minuls in datas | orderBy:'created_at':true">
+            <div class="card-header">
+                    {{minuls.created_at | date:"h:mma 'on' MMM d, y"}}
+            </div>
+            <div class="card-content p-2">
+                    {{minuls.message}}
+            </div>
+            <div class="card-footer ">
+                <div></div>
+                <button id="{{$index}}" onclick="helloWorld(this.id)" class="flat-button mif-shrink mif-2x"></button>
+                <div></div>
+            </div>
+    </div>
+</div>
+      
 
 </div>
+
+<div class="dialog" data-role="dialog" id="demoDialog1">
+        <div class="dialog-title" id="myTitle">From Minhaz</div>
+        <div class="dialog-content" id="myMessage">
+            Have my heartfell thanks for using this.
+        </div>
+        <div class="dialog-actions">
+            <button class="button js-dialog-close warning">Close</button>
+        </div>
+    </div>
+<script>
+    function helloWorld(data){
+        var str = "card"+data;
+        var date = document.getElementById(str).children[0].innerHTML;
+        var msg = document.getElementById(str).children[1].innerHTML;
+
+        document.getElementById("myTitle").innerHTML  = date;
+        document.getElementById("myMessage").innerHTML  = msg;
+        Metro.dialog.open('#demoDialog1');
+
+        /*
+        Metro.dialog.create({
+            title: date,
+            content: "<div>"+ msg +"</div>"
+        });
+        */
+        console.log(date + msg);
+    }
+</script>
+                            <!--
+                                <p>Show larger</p>
+                  <p>{{minuls.message}}</p>
+                <small class="pull-right">"{{minuls.created_at | date:"h:mma 'on' MMM d, y"}}"</small>
+                            -->
+
 
 <script>
         document.body.setAttribute("class", "bg-green");

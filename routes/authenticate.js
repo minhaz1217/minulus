@@ -27,10 +27,21 @@ module.exports = function(passport){
 	}));
 	//log out
 	router.get('/signout', function(req, res) {
+		console.log("SIGNOUT Request received");
 		req.logout();
 		res.redirect('/');
 	});
+	router.get('/loginCheck', function(req, res) {
+		if(req.isAuthenticated()){
+			console.log("TRUE");
+			return res.send({state:"success", user: req.user.username});
+		}else{
+			console.log("false");
+			return res.send({state:"fail"});
 
+		}
+		//console.log("HI from is signeinin  "+ req.isAuthenticated());
+	});
 	return router;
 
 }

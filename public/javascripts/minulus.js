@@ -1,16 +1,19 @@
-var app = angular.module("minulus",['ngRoute', 'ngResource']).run(function($rootScope){
-
-    if($rootScope.authenticated == null || $rootScope.authenticated == false){
-        $rootScope.authenticated = false;
-        $rootScope.current_user = "";
-    }
-
-        $rootScope.authenticated = false;
-        $rootScope.current_user = "";
+var app = angular.module("minulus",['ngRoute', 'ngResource']).run(function($rootScope, $http,$location){
+    $http.get("/auth/loginCheck").success(function(data){
+        if(data.state == "success"){
+            $rootScope.current_user = data.user;
+            $rootScope.authenticated = true;
+        }else{
+            $rootScope.current_user = null;
+            $rootScope.authenticated = false;
+        }
+    });
     $rootScope.signout = function(){
         $http.get('auth/signout');
         $rootScope.authenticated = false;
         $rootScope.current_user = "";
+        console.log("HI");
+        $location.path("/");
     }
 });
 
@@ -62,34 +65,37 @@ app.controller("mainController", function($scope){
 });
 
 app.controller("dashBoardcontroller", function($scope,$rootScope,$location,postService,$http){
-    /*
+
     if($rootScope.authenticated == false){
         $location.path("/signin");
         console.log("Sign in first");
         return;
     }else{
         $scope.username = $rootScope.current_user;
+        //TODO: must change the website root
+        var websiteRoot = "http://localhost:3000/#/u/";
+        $scope.urlValue = websiteRoot+$scope.username;
+        $http.post("/api/posts", {user: $rootScope.current_user}).success(function(data){
+            $scope.datas = data;
+            //console.log(data);
+        });
     }
-    */
-   $scope.username = $rootScope.current_user;
+    
 
-   /*
-   postService.getAll().success(function(data){
-       $scope.datas = data;
-   });
-   */
-
-   //TODO: must change the website root
-  var websiteRoot = "http://localhost:3000/#/u/";
-  $scope.urlValue = websiteRoot+"minhaz";
-  $http.post("/api/posts", {user: $rootScope.current_user}).success(function(data){
-    if(data != ""){
-        $scope.datas = data;
-    }else{
-        $scope.error_message = "You need to re-login.";
-    }
+    /*
+$scope.username = $rootScope.current_user;
+//TODO: must change the website root
+var websiteRoot = "http://localhost:3000/#/u/";
+$scope.urlValue = websiteRoot+"minhaz";
+$http.post("/api/posts", {user: $rootScope.current_user}).success(function(data){
+if(data != ""){
+    $scope.datas = data;
+}else{
+    $scope.error_message = "You need to re-login.";
+}
 
 });
+*/
 //   $scope.datas = postService.query();
 
 
@@ -97,6 +103,7 @@ app.controller("dashBoardcontroller", function($scope,$rootScope,$location,postS
 
 app.controller("signController", function($scope,$http,$rootScope,$location){
     $scope.signin = function(){
+        
         var user = {username: $scope.username, password : $scope.password};
         $http.post("/auth/signin", user).success(function(data){
             if(data.state == 'success'){
