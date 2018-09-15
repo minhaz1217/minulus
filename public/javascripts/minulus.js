@@ -35,12 +35,12 @@ app.config(function($routeProvider){
     })
     //TODO: make a 404 page and go to 404 page
     .when("/u",{
-        templateUrl: "message.html",
-        controller: "userController"
+        templateUrl: "signup.html",
+        controller: "messageController"
     })
     .when("/u/:username", {
         templateUrl: "message.html",
-        controller: "userController"
+        controller: "messageController"
     });
 });
 
@@ -78,6 +78,10 @@ app.controller("dashBoardcontroller", function($scope,$rootScope,$location,postS
        $scope.datas = data;
    });
    */
+
+   //TODO: must change the website root
+  var websiteRoot = "http://localhost:3000/#/u/";
+  $scope.urlValue = websiteRoot+"minhaz";
   $http.post("/api/posts", {user: $rootScope.current_user}).success(function(data){
     if(data != ""){
         $scope.datas = data;
@@ -89,7 +93,7 @@ app.controller("dashBoardcontroller", function($scope,$rootScope,$location,postS
 //   $scope.datas = postService.query();
 
 
-})
+});
 
 app.controller("signController", function($scope,$http,$rootScope,$location){
     $scope.signin = function(){
@@ -116,7 +120,7 @@ app.controller("signController", function($scope,$http,$rootScope,$location){
                 $location.path("/dashboard");
                 console.log("Successful");
             }else{
-                $scope.error_message = data.message;
+                $scope.error_message = "Error in signup";
                 console.log("Unsuccessful");
             }
         });
@@ -124,27 +128,39 @@ app.controller("signController", function($scope,$http,$rootScope,$location){
 });
 
 
-app.controller("userController", function($scope, $routeParams, $http){
+app.controller("messageController", function($scope, $routeParams, $http, $location){
     
     $scope.data = {username: "", message: "", created_at: ""};
-
-
     if($routeParams.username == null){
         $scope.data.username = "null";
     }else{
+
         console.log($routeParams.username);
         $scope.username = $routeParams.username;
     }
+    $scope.data.username = $routeParams.username;
+    console.log("Message to : " + $scope.data.username);
+    $http.post("/api/u", $scope.data).success(function(data){
+        if(data.state == "success"){
+            //TODO: remove this log
+            console.log("SUCCESS");
+        }else{
+            console.log("UNSUCCESS");
+            $location.path("/signup");
+        }
+    });
 
-    $scope.data.username = $scope.username;
+
+
     
-
     $scope.send = function(){
         $scope.data.created_at = Date.now();
         $http.post("/api/send", $scope.data).success(function(data){
             if(data.state == "success"){
+                $scope.success_message = "Message sent.";
                 console.log("SUCCESS");
             }else{
+                $scope.error_message = "Problem in sending message.";
                 console.log("UNSCUCCESSFUL");
             }
         });

@@ -1,38 +1,14 @@
-<aside class="sidebar pos-absolute z-2"
-data-role="sidebar"
-data-toggle="#sidebar-toggle-3"
-id="sb3"
-data-shift=".shifted-content">
-<div class="sidebar-header">
-        <a href="/" class="fg-white sub-action"
-           onclick="Metro.sidebar.close('#sb1'); return false;">
-            <span class="mif-arrow-left mif-2x"></span>
-        </a>
-        <div class="avatar">
-            <img data-role="gravatar" data-email="sergey@pimenov.com.ua">
-        </div>
-        <span class="title">Minulus</span>
-        <span class="subtitle"> 2018 © Minhazul Hayat Khan</span>
-    </div>
-<ul class="sidebar-menu">
-    <li><a href="#/dashboard"><span class="mif-files-empty icon"></span>Dashboard</a></li>
- <li><a href="#/signin"><span class="mif-home icon"></span>Login</a></li>
- <li><a href="#/signup"><span class="mif-books icon"></span>Register</a></li>
-</ul>
-</aside>
-<div class="shifted-content h-100 p-ab">
-<div class="app-bar pos-absolute bg-red z-1" data-role="appbar">
- <button class="app-bar-item c-pointer" id="sidebar-toggle-3">
-     <span class="mif-menu fg-white"></span>
- </button>
-</div>
 
-</div>
 <div class="h-vh-100">
     <h1>{{datas}}</h1>
+
         <form class="login-form bg-white p-6 mx-auto border bd-default win-shadow" ng-submit="send()">
+            
             <span class="" style="margin-top: -10px;"></span>
             <h2 class="text-light">Message for : {{username}}</h2>
+            <p style='color:red'>{{error_message}}</p>
+            <p style='color:green'>{{success_message}}</p>
+
             <hr class="mt-4 mb-4 bg-white">
             <div class="form-group">
                 <textarea ng-model= "data.message" placeholder="Enter your message"></textarea> 
@@ -43,3 +19,6 @@ data-shift=".shifted-content">
         </form>
 
 </div>
+<script>
+        document.body.setAttribute("class", "bg-teal");
+</script>

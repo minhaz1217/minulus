@@ -1,8 +1,9 @@
 
-<div class="h-vh-100 bg-yellow">
+<div class="h-vh-100">
         <form class="login-form bg-white p-6 mx-auto border bd-default win-shadow" ng-submit="signup()">
             <span class="mif-vpn-lock mif-4x place-right" style="margin-top: -10px;"></span>
             <h2 class="text-light">Signup for minulus</h2>
+            <p style="color:red">{{error_message}}</p>
             <hr class="thin mt-4 mb-4 bg-white">
             <div class="form-group">
                 <input type="text" data-role="input" ng-model="username" data-prepend="<span class='mif-envelop'>" placeholder="Enter your username..." data-validate="required email">
@@ -21,4 +22,4 @@
     
 <script>
         document.body.setAttribute("class", "bg-yellow");
-    </script>
+</script>

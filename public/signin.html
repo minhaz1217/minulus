@@ -3,6 +3,8 @@
         <form class="login-form bg-white p-6 mx-auto border bd-default win-shadow" ng-submit="signin()">
             <span class="mif-home mif-lg fg-red mif-3x place-right" style="margin-top: -10px;"></span>
             <h2 class="text-light">Login</h2>
+            <p style="color:red">{{error_message}}</p>
+
             <hr class="thin mt-4 mb-4 bg-white">
             <div class="form-group">
                 <input type="text" data-role="input" ng-model="username" data-prepend="<span class='mif-envelop'>" placeholder="Username" data-validate="required email">
