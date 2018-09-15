@@ -27,9 +27,19 @@
         </div>
     <h1 class=".bg-red"></h1>
     <div id="post-stream">
+
+
+
                 <div class="post" ng-repeat="minuls in datas | orderBy:'created_at':true" ng-class-odd="'odd'" ng-class-even="'even'"> 
+
+                        <div data-role="panel" data-title-caption="{{minuls.created_at | date:/"h:mma 'on' MMM d, y/"}}"
+                        data-title-icon="<span class='mif-apps'></span>">
+                            
+                        <div>{{minuls.message}}</div>
+                        </div>
+                        <p>Show larger</p>
                   <p>{{minuls.message}}</p>
-                <small class="pull-right">{{minuls.created_at | date:"h:mma 'on' MMM d, y"}}</small>
+                <small class="pull-right">"{{minuls.created_at | date:"h:mma 'on' MMM d, y"}}"</small>
                 </div>
           </div>
 

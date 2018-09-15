@@ -71,20 +71,35 @@
                 <span class="title">Minulus</span>
                 <span class="subtitle"> 2018 © Minhazul Hayat Khan</span>
             </div>
+            
      <ul class="sidebar-menu">
             <li><a href="#/"><span class="mif-home icon"></span>Home</a></li>
             <li ng-show="authenticated"><a href="#/dashboard"><span class="mif-files-empty icon"></span>Dashboard</a></li>
-            <li ><a href="#/dashboard"><span class="mif-logout icon"></span>Logout</a></li>
+            <li ><a href="#/dashboard"><span class="mif-previous icon"></span>Logout</a></li>
             <li><a href="#/signin"><span class="mif-vpn-lock icon"></span>Login</a></li>
          <li><a href="#/signup"><span class="mif-books icon"></span>Register</a></li>
      </ul>
  </aside>
+ 
  <div class="shifted-content h-100 p-ab">
+     
+        
      <div class="app-bar pos-absolute bg-red z-1" data-role="appbar">
          <button class="app-bar-item c-pointer" id="sidebar-toggle-3">
              <span class="mif-menu fg-white"></span>
          </button>
+         <h3><a href="#/" class="websiteTitle">MINULUS</a></h3>
      </div>
+     <style>
+     .websiteTitle{
+         color:white;
+         box-shadow:5px 5px 11px 0px black;
+     }
+     .websiteTitle:hover{
+         text-decoration: none;
+         color:white;
+     }
+     </style>
 <h1>
     {{authenticated}} {{ current_user}}
 </h1>
