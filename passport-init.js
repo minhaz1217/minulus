@@ -72,7 +72,7 @@ module.exports = function(passport){
 						}
 						console.log(newAccount.username + " registration successful");
 						var newMessage = new datas();
-						newMessage.message = "Please accept my heartfelt thank you for trying out this project -minhaz";
+						newMessage.message = "Please accept my heartfelt thank you for trying out this project. You have no idea how much it means to me that you are here. -minhaz";
 						newMessage.username = newAccount.username;
 						newMessage.save(function(err){
 							if(err){

@@ -44,6 +44,10 @@ app.config(function($routeProvider){
     .when("/u/:username", {
         templateUrl: "message.html",
         controller: "messageController"
+    })
+    .when('/:random', {
+        templateUrl : "404.html",
+        controller: "mainController"
     });
 });
 
