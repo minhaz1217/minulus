@@ -77,7 +77,7 @@ app.controller("dashBoardcontroller", function($scope,$rootScope,$location,postS
     }else{
         $scope.username = $rootScope.current_user;
         //TODO: must change the website root
-        var websiteRoot = "http://localhost:3000/#/u/";
+        var websiteRoot = "https://minulus.herokuapp.com/#/u/";
         $scope.urlValue = websiteRoot+$scope.username;
         $http.post("/api/posts", {user: $rootScope.current_user}).success(function(data){
             $scope.datas = data;
