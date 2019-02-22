@@ -5,7 +5,7 @@ var app = angular.module("minulus",['ngRoute', 'ngResource']).run(function($root
         if(data.state == "success"){
             $rootScope.current_user = data.user;
             $rootScope.authenticated = true;
-            console.log("HI");
+            ////console.log("HI");
         }else{
             $rootScope.current_user = null;
             $rootScope.authenticated = false;
@@ -16,7 +16,7 @@ var app = angular.module("minulus",['ngRoute', 'ngResource']).run(function($root
         $http.get('auth/signout');
         $rootScope.authenticated = false;
         $rootScope.current_user = "";
-        console.log("Signedout");
+        ////console.log("Signedout");
         $location.path("/");
     }
 });
@@ -76,23 +76,23 @@ app.controller("dashBoardcontroller", function($scope,$rootScope,$location,$http
 
     if($rootScope.authenticated == false){
         $location.path("/signin");
-        console.log("Sign in first");
+        //console.log("Sign in first");
         return;
     }else{
         $scope.username = $rootScope.current_user;
         if($scope.username == "undefined" || $scope.username == null){
-            console.log("GOTO");
+            //console.log("GOTO");
             $location.path("/");
         }
 
-        console.log("HI: " + $rootScope.authenticated);
+        //console.log("HI: " + $rootScope.authenticated);
         //TODO: must change the website root
         var websiteRoot = "https://minulus.herokuapp.com/#/u/";
         $scope.urlValue = websiteRoot+$scope.username;
         
         $http.post("/api/posts", {user: $rootScope.current_user}).success(function(data){
             $scope.datas = data;
-            //console.log(data);
+            ////console.log(data);
         });
     }
     
@@ -125,10 +125,10 @@ app.controller("signController", function($scope,$http,$rootScope,$location){
                 $rootScope.authenticated = true;
                 $rootScope.current_user = data.user.username;
                 $location.path("/dashboard");
-                console.log("Successful");
+                //console.log("Successful");
             }else{
                 $scope.error_message = data.message;
-                console.log("Unsuccessful");
+                //console.log("Unsuccessful");
             }
         });
 
@@ -140,10 +140,10 @@ app.controller("signController", function($scope,$http,$rootScope,$location){
                 $rootScope.authenticated = true;
                 $rootScope.current_user = data.user.username;
                 $location.path("/dashboard");
-                console.log("Successful");
+                //console.log("Successful");
             }else{
                 $scope.error_message = "Error in signup";
-                console.log("Unsuccessful");
+                //console.log("Unsuccessful");
             }
         });
     }
@@ -157,17 +157,17 @@ app.controller("messageController", function($scope, $routeParams, $http, $locat
         $scope.data.username = "null";
     }else{
 
-        console.log($routeParams.username);
+        //console.log($routeParams.username);
         $scope.username = $routeParams.username;
     }
     $scope.data.username = $routeParams.username;
-    console.log("Message to : " + $scope.data.username);
+    //console.log("Message to : " + $scope.data.username);
     $http.post("/api/u", $scope.data).success(function(data){
         if(data.state == "success"){
             //TODO: remove this log
-            console.log("SUCCESS");
+            //console.log("SUCCESS");
         }else{
-            console.log("UNSUCCESS");
+            //console.log("UNSUCCESS");
             $location.path("/signup");
         }
     });
@@ -180,10 +180,10 @@ app.controller("messageController", function($scope, $routeParams, $http, $locat
         $http.post("/api/send", $scope.data).success(function(data){
             if(data.state == "success"){
                 $scope.success_message = "Message sent.";
-                console.log("SUCCESS");
+                //console.log("SUCCESS");
             }else{
                 $scope.error_message = "Problem in sending message.";
-                console.log("UNSCUCCESSFUL");
+                //console.log("UNSCUCCESSFUL");
             }
         });
     }
