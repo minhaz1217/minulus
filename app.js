@@ -16,7 +16,7 @@ var usersRouter = require('./routes/users');
 var mongoose = require("mongoose");
 
 //mongoose.connect("mongodb://localhost/minulus");
-mongoose.connect("mongodb://minulus:minulus123@ds149682.mlab.com:49682/db-minhaz110");
+mongoose.connect("mongodb://mongoadmin:minhaz@localhost:27017/minulus?authSource=admin");
 
 require("./models/accounts.js");
 require("./models/data.js");
