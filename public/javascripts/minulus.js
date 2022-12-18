@@ -1,6 +1,6 @@
 var app = angular.module("minulus",['ngRoute', 'ngResource']).run(function($rootScope, $http,$location){
 
-    $rootScope.websiteRoot = "https://minulus.herokuapp.com/#/u/";
+    $rootScope.websiteRoot = "https://minulus.minhazul.com/#/u/";
     $http.get("/auth/loginCheck").success(function(data){
         if(data.state == "success"){
             $rootScope.current_user = data.user;
@@ -87,7 +87,7 @@ app.controller("dashBoardcontroller", function($scope,$rootScope,$location,$http
 
         //console.log("HI: " + $rootScope.authenticated);
         //TODO: must change the website root
-        var websiteRoot = "https://minulus.herokuapp.com/#/u/";
+        var websiteRoot = "https://minulus.minhazul.com/#/u/";
         $scope.urlValue = websiteRoot+$scope.username;
         
         $http.post("/api/posts", {user: $rootScope.current_user}).success(function(data){
