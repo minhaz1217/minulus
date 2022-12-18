@@ -1,5 +1,6 @@
 {
   "name": "minulus",
+  "description": "A very basic anonymous message sending app that I built as a helper to learn MEAN stack while in university.",
   "version": "0.0.0",
   "private": true,
   "scripts": {
